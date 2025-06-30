@@ -254,6 +254,19 @@ For scenarios requiring structured data exchange with an `LLM Agent`, the ADK pr
 * **`output_schema` (Optional):** Define a schema representing the desired output structure. If set, the agent's final response *must* be a JSON string conforming to this schema.
     * **Constraint:** Using `output_schema` enables controlled generation within the LLM but **disables the agent's ability to use tools or transfer control to other agents**. Your instructions must guide the LLM to produce JSON matching the schema directly.
 
+## Using a Planner
+
+Planners help break down complex tasks into manageable steps. They can orchestrate multiple tools to achieve a larger goal.
+
+Here's how to initialize a simple built-in planner:
+
+```python
+from google.adk.planners import BuiltInPlanner
+
+# Initialize the planner
+planner = BuiltInPlanner()
+```
+
 * **`output_key` (Optional):** Provide a string key. If set, the text content of the agent's *final* response will be automatically saved to the session's state dictionary under this key. This is useful for passing results between agents or steps in a workflow.
     * In Python, this might look like: `session.state[output_key] = agent_response_text`
     * In Java: `session.state().put(outputKey, agentResponseText)`
